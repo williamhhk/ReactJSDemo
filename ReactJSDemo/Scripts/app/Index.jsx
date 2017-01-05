@@ -13,8 +13,8 @@ class NameForm extends React.Component {
     }
 
     handleFormName(event) {
-        console.log(event);
-        this.setState({ formName: event.data.value });
+        console.log(event.target.value);
+        this.setState({ formName: event.target.value });
     }
 
     handleSubmit(event) {
@@ -30,11 +30,15 @@ class NameForm extends React.Component {
     }
 
     render() {
+        const FormName = this.state.formName;
+        console.log(this.state.formName);
+        console.log(this.props.Name);
         return (
           <form onSubmit={this.handleSubmit}>
         <label>
             Name:
           <input type="text" value={this.props.Name}  />
+          <input type="text" value={FormName}  onChange={this.handleFormName}  />
         </label>
          <input type="submit" value="Submit" />
       </form>
@@ -50,9 +54,8 @@ class ComponentWithGriddle extends React.Component {
         };
     }
     onRowClick(row) {
-        console.log(row.props.data.name);
         this.setState({ selectedRowId: row.props.data.id });
-        this.props.handleNameChange(row.props.data.name);
+        this.props.onChange(row.props.data.name);
     }
     render() {
         var rowMetadata = {bodyCssClassName: rowData => (rowData.id === this.state.selectedRowId ? "selected" : '')};
@@ -73,19 +76,17 @@ class RootFrame extends React.Component {
 
     handleNameChange(name)
     {
-        console.log("Inside here");
-        console.log(name);
+        console.log("Name is  " + name);
         this.setState({ Name: name });
     }
-    
 
     //             <NameForm UrlPost={this.props.UrlPost}  Name={this.state.Name}/>
     //  Use Parent as a state manager, once this is set, Child Component cannot change.
     render() {
         return (
         <div>
-            <ComponentWithGriddle Name={this.state.Name} handleNameChange={this.handleNameChange.bind(this)} />
-            <NameForm UrlPost={this.props.UrlPost}  Name={this.state.Name}/>
+            <ComponentWithGriddle Name={this.state.Name} onChange={this.handleNameChange} />
+            <NameForm UrlPost={this.props.UrlPost}  Name={this.state.Name} />
         </div>
        );
     };
