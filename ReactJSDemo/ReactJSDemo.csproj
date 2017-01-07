@@ -133,6 +133,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\search.jsx" />
     <Content Include="Scripts\app\data.js" />
     <Content Include="Scripts\app\Parent.jsx" />
     <Content Include="Scripts\griddle.js" />
